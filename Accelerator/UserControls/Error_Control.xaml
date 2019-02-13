@@ -1,0 +1,31 @@
+﻿<UserControl
+    x:Class="Accelerator.UserControls.Error_Control"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Accelerator.UserControls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=" 1*"/>
+            <RowDefinition Height=" 2*"/>
+        </Grid.RowDefinitions >
+        <StackPanel Grid.Row="1" Orientation="Vertical">
+            <Grid>
+                <ProgressRing x:Name="pr" IsActive="False" Visibility="Visible"/>
+                <SymbolIcon x:Name="sy" Symbol="Repair" Visibility="Visible"/>
+            </Grid >
+            <TextBlock x:Name="ErrorTB" HorizontalAlignment="Center" FontSize="20" Text="A fatal error has occurred."/>
+            <TextBlock x:Name="NextTB" HorizontalAlignment="Center" FontSize="16" Text="Tap here to retry."/>
+            <TextBlock x:Name="eMessageTB" HorizontalAlignment="Center" FontSize="14" Text="XXXXXX"  Margin="0,20,0,0"/>
+            <!--
+            <TextBlock x:Name="eInnerExceptionTB" HorizontalAlignment="Center" FontSize="14" Text="XXXXXX" TextWrapping="WrapWholeWords"/>
+            <TextBlock x:Name="eStackTraceTB" HorizontalAlignment="Center" FontSize="14" Text="XXXXXX" TextWrapping="WrapWholeWords"/>
+            -->
+        </StackPanel >
+    </Grid>
+</UserControl>

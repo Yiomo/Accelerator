@@ -1,0 +1,72 @@
+﻿<Page
+    x:Class="Accelerator.Pages.Audio_VOAL_Page"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:converters="using:Accelerator.Converter"
+    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+    NavigationCacheMode="Required"
+    SizeChanged="Audio_VOAL_Page_SizeChanged">
+
+    <Page.Resources>
+        <converters:DominIpConverter x:Key="DominIpConverter"/>
+        <DataTemplate x:Key="listViewItemTemplate">
+            <controls:DropShadowPanel OffsetY="14" OffsetX="3">
+                <ListViewItem Margin="0,12,0,0" Background="White" HorizontalAlignment="Stretch">
+                    <StackPanel Height="72" Width="4000" 
+                                HorizontalAlignment="Stretch" Orientation="Horizontal">
+                        <controls:ImageEx Height="72" Width="72" Margin="0,0,10,0" Stretch="UniformToFill"
+                                          Source="{Binding NetImagePath}"/>
+                        <StackPanel Orientation="Vertical" Width="800">
+                            <TextBlock VerticalAlignment="Center" 
+                                   FontSize="24" Text="{Binding TitleEN}"/>
+                            <TextBlock VerticalAlignment="Center" 
+                                   FontSize="16" Text="{Binding TitleCN}"/>
+                        </StackPanel >
+                        <StackPanel Orientation="Horizontal">
+                            <AppBarButton
+                                Height=" 60" Width="60" Style="{ThemeResource AppBarButtonRevealStyle}"
+                                VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                Icon="Play" Foreground="Black" Label="Play" 
+                                Click="PlayBtn_Click"/>
+                            <AppBarButton 
+                                Height=" 60" Width="60" Style="{ThemeResource AppBarButtonRevealStyle}"
+                                VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                Icon="OutlineStar" Foreground="Black" Label="Star" />
+                            <AppBarButton 
+                                Height=" 60" Width="60" Style="{ThemeResource AppBarButtonRevealStyle}"
+                                VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                Icon="Add" Foreground="Black" Label="Add" />
+                        </StackPanel >
+                    </StackPanel>
+                </ListViewItem >
+            </controls:DropShadowPanel >
+        </DataTemplate >
+    </Page.Resources >
+
+    <Grid x:Name="grid">
+        <ListView x:Name="listview" Style="{StaticResource ListViewStyle1}" HorizontalContentAlignment="Stretch"
+            SelectionMode="None" ItemTemplate="{StaticResource listViewItemTemplate}">
+            <ListView.Header>
+                <controls:ScrollHeader Mode="Sticky">
+                    <controls:DropShadowPanel OffsetY="3" HorizontalAlignment="Stretch" >
+                        <Grid x:Name="playallgrid" Background="White" Margin="0,0,0,10" HorizontalAlignment="Stretch">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="12" PointerPressed="PlayAllBtn_PointerPressed">
+                                <SymbolIcon Symbol="Shuffle"/>
+                                <TextBlock Text="播放本列表" Margin="10,0,0,0" FontSize="16"/>
+                            </StackPanel >
+                        </Grid >
+                    </controls:DropShadowPanel >
+                </controls:ScrollHeader >
+            </ListView.Header>
+            <ListView.Footer>
+                <Button x:Name="LoadmoreBtn" Visibility="Visible" Background="Transparent" HorizontalAlignment="Stretch" 
+                        Click="LoadmoreBtn_Click" Content="点击加载更多~" BorderThickness="0" Foreground="#FF979797" />
+            </ListView.Footer >
+        </ListView >
+    </Grid>
+</Page>

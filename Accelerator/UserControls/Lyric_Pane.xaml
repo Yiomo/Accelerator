@@ -1,0 +1,129 @@
+﻿<Page
+    x:Class="Accelerator.UserControls.Lyric_Pane"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:toolkitctrl="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:converter="using:Accelerator.Converter"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <DataTemplate x:Key="LyricListViewItemTemplate">
+            <Grid Margin="0,10,0,10" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+                  Width="{Binding ElementName=grid,Path=ActualWidth, Mode=TwoWay}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="4*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions >
+                <TextBlock Text="{Binding Sentence}" Margin="4" FontSize="18"
+                           Foreground="WhiteSmoke" TextWrapping="WrapWholeWords" 
+                           HorizontalAlignment="Stretch" HorizontalTextAlignment="Center"
+                           Grid.Row="0" Grid.Column="1"/>
+                <TextBlock Text="{Binding Sentence_cn}" Margin="4" FontSize="16"
+                           Foreground="WhiteSmoke" TextWrapping="WrapWholeWords"
+                           HorizontalAlignment="Stretch" HorizontalTextAlignment="Center"
+                           Grid.Row="1" Grid.Column="1"/>
+            </Grid>
+        </DataTemplate >
+        <converter:TimeStampConverter x:Key="TimeConverter"/>
+    </Page.Resources >
+
+    <Grid x:Name="grid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="4*"/>
+            <RowDefinition Height="80"/>
+        </Grid.RowDefinitions>
+        <toolkitctrl:ImageEx x:Name="backgroundImage"
+                             Source="{Binding Path=NetImagePath,Mode=OneWay }" 
+                             Stretch="UniformToFill"
+                             Grid.RowSpan="4"/>
+        <Border Background="#B2464646" Grid.RowSpan="4"/>
+        <ListView x:Name="LyricListView" SelectionMode="None" Grid.RowSpan="4" HorizontalAlignment="Stretch"
+                  ItemTemplate="{StaticResource LyricListViewItemTemplate}"
+                  Loaded="LyricListView_Loaded" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style >
+            </ListView.ItemContainerStyle >
+        </ListView >
+        <Border Grid.RowSpan="1">
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#0C000000" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Border Grid.Row="2" Grid.RowSpan="2" >
+            <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#0C000000" />
+                    <GradientStop Color="Black"  Offset="1"/>
+                </LinearGradientBrush>
+            </Border.Background>
+        </Border>
+        <Grid Height="80" Grid.Row="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="60"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions >
+            <TextBlock x:Name="Start_Time_TB"
+                       Text="{Binding Path= StartTime,Converter={StaticResource TimeConverter}, Mode=TwoWay}" Foreground="WhiteSmoke"
+                       Width=" 40" HorizontalAlignment="Left" VerticalAlignment="Center"  HorizontalTextAlignment="Center" 
+                       Margin=" 12,-80,0,0"/>
+            <Slider x:Name="slider" Grid.Column="0" Grid.ColumnSpan="5"
+                    Style="{StaticResource SliderStyle2}" Margin="60,-20,60,0" VerticalAlignment="Top"
+                    IsThumbToolTipEnabled="False"
+                    Value="{Binding Path=StartTime, Mode=TwoWay}"
+                    Maximum="{Binding Path=TotalTime, Mode=OneWay}" Height="32" 
+                    HorizontalAlignment="Stretch"/>
+            <TextBlock x:Name="End_Time_TB"
+                       Text="{Binding Path=TotalTime,Converter={StaticResource TimeConverter},Mode=OneWay}" Foreground="WhiteSmoke" 
+                       Width=" 40" HorizontalAlignment="Right"  VerticalAlignment="Center"  HorizontalTextAlignment="Center" 
+                       Grid.Column="5" Margin="0,-80,12,0"/>
+            <Border Grid.Column="1" CornerRadius="80" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <Button x:Name="Pre_Btn" BorderThickness="0" Height=" 40" Background="Transparent" Width=" 40" Style="{StaticResource ButtonRevealStyle}">
+                    <SymbolIcon x:Name="Pre_Symbol" Symbol="Previous"  Foreground="LightGray"/>
+                </Button>
+            </Border >
+            <Border Grid.Column="2" CornerRadius="30" BorderThickness="2" 
+                    Height=" 48" Width=" 48"
+                    BorderBrush="LightGray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                <Button x:Name="Status_Btn" Background="Transparent" Style="{StaticResource ButtonRevealStyle}"
+                         Tag="{Binding Path=Status, Mode=TwoWay}" Click="Status_Btn_Click" HorizontalAlignment="Stretch"
+                         VerticalAlignment="Stretch">
+                    <SymbolIcon x:Name="Status_Symbol" Symbol="Pause" Foreground="LightGray" HorizontalAlignment="Right" Margin="0,0,0,0" VerticalAlignment="Stretch" Width="20" />
+                </Button >
+            </Border >
+            <Border Grid.Column="3" CornerRadius="80" HorizontalAlignment="Center"
+                    VerticalAlignment="Center" >
+                <Button x:Name="Next_Btn" BorderThickness="0" Height=" 40" Width=" 40" Background="Transparent" Style="{StaticResource ButtonRevealStyle}">
+                    <SymbolIcon x:Name="Next_Symbol" Symbol="Next"  Foreground="LightGray"/>
+                </Button>
+            </Border >
+            <Button x:Name="ExitFullScreen_Btn" Width=" 40" Height=" 40" Margin=" 4"
+                    Grid.Column="4"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="Transparent" 
+                    Style="{StaticResource ButtonRevealStyle}"
+                    Click="ExitFullScreen_Btn_Click">
+                <SymbolIcon Symbol="BackToWindow" Foreground="LightGray" />
+            </Button >
+            <TextBlock x:Name="testblk" Foreground="WhiteSmoke" Grid.Column="4" Width="240" HorizontalAlignment="Right"/>
+        </Grid >
+    </Grid>
+</Page>

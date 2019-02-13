@@ -1,0 +1,32 @@
+﻿<Page
+    x:Class="Accelerator.Pages.Audio_BBC_Index_Page"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <Pivot x:Name="BannerPivot">
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="6分钟" FontSize="20" VerticalAlignment="Center"/>
+                </PivotItem.Header >
+                <Frame x:Name="BBC6_Frame" Margin="-12,0,-12,0"/>
+            </PivotItem >
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="专业英语" FontSize="20"/>
+                </PivotItem.Header >
+                <Frame Margin="-12,0,-12,0"/>
+            </PivotItem >
+            <PivotItem>
+                <PivotItem.Header>
+                    <TextBlock Text="职场英语" FontSize="20"/>
+                </PivotItem.Header >
+                <Frame Margin="-12,0,-12,0"/>
+            </PivotItem >
+        </Pivot >
+    </Grid>
+</Page>

@@ -1,0 +1,16 @@
+﻿<Application
+    x:Class="Accelerator.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Accelerator">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls"/>-->
+                <ResourceDictionary Source="Dictionary/SliderBar.xaml"/>
+                <ResourceDictionary Source="Dictionary/ListView.xaml"/>
+                <ResourceDictionary Source="Dictionary/ScrollViewer.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

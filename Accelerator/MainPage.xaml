@@ -1,0 +1,42 @@
+﻿<Page
+    x:Class="Accelerator.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:uzrctrl="using:Accelerator.UserControls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid x:Name="grid">
+        <NavigationView x:Name="NaviView" Margin="0,0,0,80" IsPaneOpen="False"
+                        SelectionChanged="NaviView_SelectionChanged">
+            <NavigationView.Header>
+                <StackPanel Orientation="Horizontal" >
+                    <SymbolIcon x:Name="NaviViewSI" Symbol="Audio" Margin="0,0,12,0" />
+                    <TextBlock x:Name="NaviViewTB" Text="BBC英语" VerticalAlignment="Center" FontWeight="Bold" />
+                </StackPanel >
+            </NavigationView.Header >
+            <NavigationView.MenuItems>
+                <NavigationViewItemHeader Content="Audio"/>
+                <NavigationViewItem Content="VOA" Loading="NavigationViewItem_Loading">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe UI Emoji" Glyph="V"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItem Content="BBC">
+                    <NavigationViewItem.Icon>
+                        <FontIcon FontFamily="Segoe UI Emoji" Glyph="B"/>
+                    </NavigationViewItem.Icon>
+                </NavigationViewItem>
+                <NavigationViewItemHeader Content="Video"/>
+                <NavigationViewItem Icon="Video" Tag="Video" Content="Newsreel"/>
+                <NavigationViewItemHeader Content="Others"/>
+                <NavigationViewItem Icon="Contact" Content="User"/>
+                <NavigationViewItem Icon="Download" Content="Download"/>
+            </NavigationView.MenuItems >
+            <Frame x:Name="RootFrame" />
+        </NavigationView >
+        <uzrctrl:Player_Bar Height="80" VerticalAlignment="Bottom" />
+    </Grid>
+</Page>
